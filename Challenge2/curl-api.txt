@@ -1,0 +1,31 @@
+### Login to a GCP Linux VM instance using SSH and try the following commands to get metadata values
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/" -H "Metadata-Flavor: Google"
+
+# Query metadata directory listings
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/disks/" -H "Metadata-Flavor: Google"
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/image/" -H "Metadata-Flavor: Google"
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/disks/0/type" -H "Metadata-Flavor: Google"
+
+# recursively query directory listings
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/disks/?recursive=true" -H "Metadata-Flavor: Google"
+
+# associated firewall tags
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/tags" -H "Metadata-Flavor: Google"
+
+# wait-for-change feature
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/tags?wait_for_change=true" -H "Metadata-Flavor: Google"
+
+# use ETags
+
+curl -v "http://metadata.google.internal/computeMetadata/v1/instance/tags" -H "Metadata-Flavor: Google"
+
+#Set timeouts
+
+curl "http://metadata.google.internal/computeMetadata/v1/instance/tags?wait_for_change=true&timeout_sec=360" -H "Metadata-Flavor: Google"

@@ -1,0 +1,11 @@
+name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+entrypoint: bash
+args: [ './message.sh', '$_REGION' ]
+
+### Build API container
+name: 'gcr.io/cloud-builders/docker'
+args: [ 'build', '-t', '$_REGION-docker.pkg.dev/$PROJECT_ID/$_BASENAME-app/fe', '.' ]
+
+### Push API container to Artifact Registry
+name: 'gcr.io/cloud-builders/docker'
+args: ['push', '$_REGION-docker.pkg.dev/$PROJECT_ID/$_BASENAME-app/fe']
